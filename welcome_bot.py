@@ -5,9 +5,16 @@ import discord
 from discord.ext import commands
 
 intents = discord.Intents.default()
+intents.guilds = True
+intents.message_content = True
 intents.members = True
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s:%(levelname)s:%(name)s: %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    filename='bot.log'
+)
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
@@ -26,6 +33,19 @@ async def on_member_join(member):
                            
                            General Information: {general_information_channel.mention}
                            Roadmap: {roadmap_channel.mention}""")
+        print(f"{member} joined the server")
+
+@bot.event
+async def on_disconnect():
+    print('Bot is disconnecting...')
+
+@bot.event
+async def on_error(event, *args, **kwargs):
+    args = ", ".join(list(args))
+    kwargs = ", ".join(list(kwargs))
+    message = f"An error occurred while handling the {event} event.\n\nArgs: {args}\n\nKwargs: {kwargs}"
+    print(message)
+
 load_dotenv()
 DISCORD_TOKEN=os.getenv("DISCORD_TOKEN")
 bot.run(DISCORD_TOKEN)
