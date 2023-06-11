@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import logging
 import os
+import asyncio
 import discord
 from discord.ext import commands
 
@@ -49,7 +50,14 @@ async def on_error(event, *args, **kwargs):
 def __main__():
     load_dotenv()
     DISCORD_TOKEN=os.getenv("DISCORD_TOKEN")
-    bot.run(DISCORD_TOKEN)
+    loop = asyncio.get_event_loop()
+
+    try:
+        loop.run_until_complete(bot.start(DISCORD_TOKEN))
+    except KeyboardInterrupt:
+        loop.run_until_complete(bot.close())
+    finally:
+        loop.close()
 
 if os.name != 'nt':
     pid = "/tmp/welcome_bot.pid"
