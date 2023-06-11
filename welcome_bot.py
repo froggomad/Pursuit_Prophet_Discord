@@ -56,6 +56,10 @@ async def on_error(event, *args, **kwargs):
     message = f"An error occurred while handling the {event} event.\n\nArgs: {args}\n\nKwargs: {kwargs}"
     print(message)
 
-load_dotenv()
-DISCORD_TOKEN=os.getenv("DISCORD_TOKEN")
-bot.run(DISCORD_TOKEN)
+def __main__():
+    load_dotenv()
+    DISCORD_TOKEN=os.getenv("DISCORD_TOKEN")
+    bot.run(DISCORD_TOKEN)
+
+if __name__ == "__main__":
+    __main__()
