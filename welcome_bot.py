@@ -4,16 +4,6 @@ import os
 import discord
 from discord.ext import commands
 
-if os.name != 'nt':
-    pid = "/tmp/test.pid"
-    from daemonize import Daemonize
-
-    def daemonize():
-        daemon = Daemonize(app="welcome_bot.py", pid=pid, action=main)
-        daemon.start()
-
-    daemonize()
-
 intents = discord.Intents.default()
 intents.guilds = True
 intents.message_content = True
@@ -60,6 +50,16 @@ def __main__():
     load_dotenv()
     DISCORD_TOKEN=os.getenv("DISCORD_TOKEN")
     bot.run(DISCORD_TOKEN)
+
+if os.name != 'nt':
+    pid = "/tmp/test.pid"
+    from daemonize import Daemonize
+
+    def daemonize():
+        daemon = Daemonize(app="welcome_bot.py", pid=pid, action=main)
+        daemon.start()
+
+    daemonize()
 
 if __name__ == "__main__":
     __main__()
