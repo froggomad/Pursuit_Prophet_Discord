@@ -53,10 +53,12 @@ def __main__():
 
 if os.name != 'nt':
     pid = "/tmp/welcome_bot.pid"
+    stderr = "bot_err.log"
+    stdout = "bot.log"
     from daemonize import Daemonize
 
     def daemonize():
-        daemon = Daemonize(app="welcome_bot.py", pid=pid, action=__main__)
+        daemon = Daemonize(app="welcome_bot.py", pid=pid, stdout=stdout, stderr=stderr, action=__main__)
         try:
             daemon.start()
         except Exception as e:
