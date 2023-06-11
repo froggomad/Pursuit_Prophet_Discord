@@ -58,7 +58,7 @@ if os.name != 'nt':
     from daemonize import Daemonize
 
     def daemonize():
-        daemon = Daemonize(app="welcome_bot.py", pid=pid, stdout=stdout, stderr=stderr, action=__main__)
+        daemon = Daemonize(app="welcome_bot.py", pid=pid, action=__main__, stdout=stdout, stderr=stderr)
         try:
             daemon.start()
         except Exception as e:
