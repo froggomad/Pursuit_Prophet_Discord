@@ -52,7 +52,7 @@ def __main__():
     bot.run(DISCORD_TOKEN)
 
 if os.name != 'nt':
-    pid = "/tmp/test.pid"
+    pid = "9999"
     from daemonize import Daemonize
 
     def daemonize():
