@@ -56,7 +56,7 @@ if os.name != 'nt':
     from daemonize import Daemonize
 
     def daemonize():
-        daemon = Daemonize(app="welcome_bot.py", pid=pid, action=main)
+        daemon = Daemonize(app="welcome_bot.py", pid=pid, action=__main__)
         daemon.start()
 
     daemonize()
