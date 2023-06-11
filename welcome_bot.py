@@ -51,15 +51,15 @@ def __main__():
     DISCORD_TOKEN=os.getenv("DISCORD_TOKEN")
     bot.run(DISCORD_TOKEN)
 
-if os.name != 'nt':
-    pid = "/tmp/welcome_bot.pid"
-    from daemonize import Daemonize
+# if os.name != 'nt':
+#     pid = "/tmp/welcome_bot.pid"
+#     from daemonize import Daemonize
 
-    def daemonize():
-        daemon = Daemonize(app="welcome_bot.py", pid=pid, action=__main__)
-        daemon.start()
+#     def daemonize():
+#         daemon = Daemonize(app="welcome_bot.py", pid=pid, action=__main__)
+#         daemon.start()
 
-    daemonize()
+#     daemonize()
 
 if __name__ == "__main__":
     __main__()
